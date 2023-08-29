@@ -1,0 +1,170 @@
+[
+    {
+        "id": "f07e2fe9fa1e0ece",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d5d8094f7b013dfb",
+        "type": "serial in",
+        "z": "f07e2fe9fa1e0ece",
+        "name": "COM1",
+        "serial": "48a2fefe496e279d",
+        "x": 210,
+        "y": 160,
+        "wires": [
+            [
+                "2551b5bd6ee9f3d6"
+            ]
+        ]
+    },
+    {
+        "id": "2551b5bd6ee9f3d6",
+        "type": "json",
+        "z": "f07e2fe9fa1e0ece",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 370,
+        "y": 160,
+        "wires": [
+            [
+                "5b23da78147ef92e"
+            ]
+        ]
+    },
+    {
+        "id": "ef63b8e46511531f",
+        "type": "ui_gauge",
+        "z": "f07e2fe9fa1e0ece",
+        "name": "",
+        "group": "496542c81101696c",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Distancia",
+        "label": "cm",
+        "format": "{{value | number:1}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "50",
+        "seg2": "80",
+        "diff": false,
+        "className": "",
+        "x": 680,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "d9732aa2607a142c",
+        "type": "inject",
+        "z": "f07e2fe9fa1e0ece",
+        "name": "Simulação serial arduino",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "0.3",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0",
+        "topic": "",
+        "payload": "{\"Distancia\":75.4}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5aeef5d02bf791e9",
+        "type": "debug",
+        "z": "f07e2fe9fa1e0ece",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "5b23da78147ef92e",
+        "type": "function",
+        "z": "f07e2fe9fa1e0ece",
+        "name": "function 1",
+        "func": "var distancia = msg.payload[\"Distancia\"];\nmsg.payload = distancia;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 160,
+        "wires": [
+            [
+                "ef63b8e46511531f",
+                "5aeef5d02bf791e9"
+            ]
+        ]
+    },
+    {
+        "id": "48a2fefe496e279d",
+        "type": "serial-port",
+        "serialport": "COM1",
+        "serialbaud": "57600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "496542c81101696c",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "0f4fc8296ed8297d",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0f4fc8296ed8297d",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
